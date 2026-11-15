@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "MXControl",
+    name: "Keybridge",
     platforms: [.macOS(.v15)],
     targets: [
         .target(
@@ -11,9 +11,9 @@ let package = Package(
             swiftSettings: [.swiftLanguageMode(.v5)]
         ),
         .executableTarget(
-            name: "MXControl",
+            name: "Keybridge",
             dependencies: ["HIDPP"],
-            path: "Sources/MXControl",
+            path: "Sources/Keybridge",
             swiftSettings: [.swiftLanguageMode(.v5)]
         ),
     ]

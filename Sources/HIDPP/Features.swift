@@ -1,6 +1,6 @@
 import Foundation
 
-// Typed access to the HID++ 2.0 features MX Control uses.
+// Typed access to the HID++ 2.0 features Keybridge uses.
 // Layouts follow the public HID++ 2.0 feature specs (as also implemented by Solaar).
 
 // MARK: Battery (0x1004 Unified Battery, 0x1000 Battery Status fallback)
@@ -367,7 +367,7 @@ extension LogiDevice {
 
 // MARK: Snapshot
 
-/// Everything MX Control shows for one device.
+/// Everything Keybridge shows for one device.
 public struct DeviceState {
     public var battery: BatteryInfo?
     public var backlight: BacklightConfig?

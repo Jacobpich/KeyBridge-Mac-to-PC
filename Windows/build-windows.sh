@@ -1,6 +1,6 @@
 #!/bin/zsh
-# Builds the Windows companion (MX Control for PC) on this Mac and puts MXControlPC.exe in
-# MX Control/dist/, then rebuilds MX Control so its setup page can serve the exe to the PC.
+# Builds the Windows companion (Keybridge) on this Mac and puts Keybridge.exe in
+# Keybridge/dist/, then rebuilds Keybridge so its setup page can serve the exe to the PC.
 # Needs the .NET 8 SDK (~/.dotnet). The first build downloads the Windows runtime packs.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -9,8 +9,8 @@ DOTNET="${DOTNET:-$HOME/.dotnet/dotnet}"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
 
 "$DOTNET" build Probe/Probe.csproj -c Release -v quiet
-"$DOTNET" publish MXControlPC/MXControlPC.csproj -c Release -o out/MXControlPC -v quiet
+"$DOTNET" publish KeybridgePC/KeybridgePC.csproj -c Release -o out/KeybridgePC -v quiet
 mkdir -p ../dist
-cp out/MXControlPC/MXControlPC.exe ../dist/MXControlPC.exe
-ls -lh ../dist/MXControlPC.exe
+rm -f ../dist/MXControlPC.exe ../dist/KeybridgePC.exe; cp out/KeybridgePC/Keybridge.exe ../dist/Keybridge.exe
+ls -lh ../dist/Keybridge.exe
 ../build.sh

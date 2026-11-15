@@ -1,8 +1,8 @@
-// MXLink probe: the C# protocol code running as a pretend PC, so the Windows side's crypto and
-// framing can be checked against MX Control on the Mac.
+// KeybridgeLink probe: the C# protocol code running as a pretend PC, so the Windows side's crypto and
+// framing can be checked against Keybridge on the Mac.
 //   dotnet run --project Windows/Probe -- [--host 127.0.0.1] [--discover] [--state probe.json] [--seconds 60]
 using System.Text.Json;
-using MXLink;
+using KeybridgeLink;
 
 string? Arg(string name) { var i = Array.IndexOf(args, name); return i >= 0 && i + 1 < args.Length ? args[i + 1] : null; }
 var host = Arg("--host") ?? "127.0.0.1";
@@ -36,7 +36,7 @@ session.MessageReceived += m =>
             if (++moves % 25 == 1) Log($"pointer {x:F0},{y:F0}");
             if (x < 0) { active = false; Log($"left edge at y {y:F0} → returned"); session.Send(new Returned((float)(y / 1440))); }
             break;
-        case MXLink.Clipboard c: Log(c.Kind == 1 ? $"clipboard text: {System.Text.Encoding.UTF8.GetString(c.Data)}" : $"clipboard image {c.Data.Length} bytes"); break;
+        case KeybridgeLink.Clipboard c: Log(c.Kind == 1 ? $"clipboard text: {System.Text.Encoding.UTF8.GetString(c.Data)}" : $"clipboard image {c.Data.Length} bytes"); break;
         default: Log(m.ToString()); break;
     }
 };

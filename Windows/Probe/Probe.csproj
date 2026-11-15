@@ -7,6 +7,6 @@
     <LangVersion>12</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MXLink.Core\MXLink.Core.csproj" />
+    <ProjectReference Include="..\KeybridgeLink.Core\KeybridgeLink.Core.csproj" />
   </ItemGroup>
 </Project>
