@@ -1,17 +1,17 @@
-# MX Control Crossover
+# KeyBridge Mac to PC
 
 Use a keyboard, mouse, or trackpad connected to a Mac to control a Windows PC on the same local network. Move the pointer across to the PC to switch control. The apps pair with a six-digit confirmation code and can share clipboard content and transfer files.
 
 ## Download both apps
 
-Open the [latest GitHub release](https://github.com/Jacobpich/MX-Control/releases/latest) and download both files from the same release:
+Open the [latest GitHub release](https://github.com/Jacobpich/KeyBridge-Mac-to-PC/releases/latest) and download both files from the same release:
 
 | Computer | File | Requirements |
 | --- | --- | --- |
 | Mac | `MX-Control-macOS-arm64.zip` | Apple silicon, macOS 15 or later |
 | PC | `MXControlPC.exe` | 64-bit Windows on x86-64. The .NET runtime is included. |
 
-On the Mac, unzip the download, move **MX Control.app** to Applications, and open it. On the PC, save **MXControlPC.exe** somewhere permanent and run it. The Windows app appears in the system tray. Its **Start with Windows** tray option controls whether it launches at sign-in.
+The v1.0.0 downloads and app menus still use the original **MX Control** name. On the Mac, unzip the download, move **MX Control.app** to Applications, and open it. On the PC, save **MXControlPC.exe** somewhere permanent and run it. The Windows app appears in the system tray. Its **Start with Windows** tray option controls whether it launches at sign-in.
 
 The hobby builds are not notarized on macOS or Authenticode signed on Windows. If your system blocks a prebuilt app, use the local build instructions below or ask your administrator for an approved build. Releases include SHA-256 checksums for the two files.
 

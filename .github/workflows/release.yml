@@ -27,6 +27,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          gh release create "$RELEASE_TAG" --verify-tag --title "MX Control $RELEASE_TAG" \
+          gh release create "$RELEASE_TAG" --verify-tag --title "KeyBridge Mac to PC $RELEASE_TAG" \
             --notes 'Download both apps from this release and follow the setup in the repository README.' \
             dist/MX-Control-macOS-arm64.zip dist/MXControlPC.exe dist/SHA256SUMS.txt
