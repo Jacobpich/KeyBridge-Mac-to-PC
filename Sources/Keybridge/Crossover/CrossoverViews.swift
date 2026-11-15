@@ -238,7 +238,7 @@ struct ArrangementView: View {
                 .frame(height: height)
                 Text(description(layout)).font(.caption).foregroundStyle(.secondary)
                 if crossover.pcNeedsUpdate && layout.side != .right {
-                    Text("Update Keybridge on the PC to use this side; until then, it only works to the right.")
+                    Text("Update KeyBridge Control PC on the PC to use this side; until then, it only works to the right.")
                         .font(.caption).foregroundStyle(.orange)
                 }
             }
@@ -312,7 +312,7 @@ struct UpdatePCNote: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Label("The PC needs the new Keybridge for dragging and copying files.", systemImage: "exclamationmark.triangle.fill")
+            Label("The PC needs the new KeyBridge Control PC for dragging and copying files.", systemImage: "exclamationmark.triangle.fill")
                 .font(.caption).foregroundStyle(.orange)
             if setup.running, let address = setup.addresses.first {
                 Text("On the PC, open \(address)").font(.caption.monospaced()).textSelection(.enabled)

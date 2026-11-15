@@ -2,7 +2,7 @@ using KeybridgeLink;
 
 namespace KeybridgePC;
 
-/// Keybridge for Windows: a tray icon that keeps a Crossover connection to Keybridge on the Mac
+/// KeyBridge Control PC: a tray icon that keeps a Crossover connection to Keybridge on the Mac
 /// and turns what it receives into input on this PC.
 sealed class TrayApp : ApplicationContext
 {
@@ -39,7 +39,7 @@ sealed class TrayApp : ApplicationContext
         menu.Items.Add(_startWithWindows);
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("Quit", null, (_, _) => Quit());
-        _tray = new NotifyIcon { Icon = TrayIcon.Make(false), Text = "Keybridge", ContextMenuStrip = menu, Visible = true };
+        _tray = new NotifyIcon { Icon = TrayIcon.Make(false), Text = "KeyBridge Control PC", ContextMenuStrip = menu, Visible = true };
 
         // First run: start with Windows by default.
         if (_settings.PairedMacName is null && !Settings.StartWithWindows)
@@ -79,7 +79,7 @@ sealed class TrayApp : ApplicationContext
         if (_ui.InvokeRequired) { _ui.BeginInvoke(() => SetStatus(text, linked)); return; }
         if (_statusItem.Text != text) AppLog.Write(text);
         _statusItem.Text = text;
-        var tip = "Keybridge: " + text;
+        var tip = "KeyBridge Control PC: " + text;
         _tray.Text = tip[..Math.Min(63, tip.Length)];
         _tray.Icon = TrayIcon.Make(linked);
     }

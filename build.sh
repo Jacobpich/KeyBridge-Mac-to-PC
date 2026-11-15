@@ -13,7 +13,7 @@ cd "$(dirname "$0")"
 APP="dist/Keybridge.app"
 IDENTITY="${SIGN_IDENTITY:--}"
 BUNDLE_ID="${BUNDLE_ID:-app.keybridge.Keybridge}"
-VERSION="${VERSION:-1.1.0}"
+VERSION="${VERSION:-1.1.1}"
 
 swift build -c release --arch arm64
 BIN="$(swift build -c release --arch arm64 --show-bin-path)/Keybridge"
@@ -22,7 +22,7 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN" "$APP/Contents/MacOS/Keybridge"
 # The Windows companion (built by Windows/build-windows.sh), served to the PC by Crossover's setup page.
-if [[ -f dist/Keybridge.exe ]]; then cp dist/Keybridge.exe "$APP/Contents/Resources/"; fi
+if [[ -f dist/KeyBridge-Control-PC.exe ]]; then cp dist/KeyBridge-Control-PC.exe "$APP/Contents/Resources/"; fi
 
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>

@@ -9,7 +9,7 @@ public sealed class FileTransfers
 
     /// Received files live here until they're pasted or dropped; cleared after a week.
     public static readonly string Folder = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Keybridge", "Transfers");
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "KeyBridge", "Transfers");
 
     /// Sends one message (blocking until the connection takes it). Returns false with no link.
     public Func<Msg, bool>? Send;

@@ -11,7 +11,7 @@ sealed class PairForm : Form
 
     public PairForm(string mac, string code)
     {
-        Text = "Keybridge";
+        Text = "KeyBridge Control PC";
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = MinimizeBox = false;
         StartPosition = FormStartPosition.CenterScreen;

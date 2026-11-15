@@ -18,7 +18,9 @@ sealed class Settings : IPinStore
         public int MacPort { get; set; } = KeybridgeLink.Wire.TcpPort;
     }
 
-    private static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Keybridge");
+    /// The settings and log folder (Windows folder names ignore case, so 1.1.0's "Keybridge" is the same folder).
+    public const string DataFolderName = "KeyBridge";
+    private static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), DataFolderName);
     private static readonly string FilePath = Path.Combine(Folder, "settings.json");
     private readonly Data _data;
     private readonly object _lock = new();
@@ -83,15 +85,15 @@ sealed class Settings : IPinStore
         }
     }
 
-    /// This app used to be called "MX Control for PC". Its settings (this PC's key and the paired
-    /// Mac) and its start-with-Windows entry move to the new name, so it stays paired.
+    /// This app used to be called "MX Control for PC", then "Keybridge". Its settings (this PC's
+    /// key and the paired Mac) and its start-with-Windows entry move to the new name, so it stays paired.
     private static void MigrateFromMXControl()
     {
         const string old = "MX Control for PC";
         foreach (var root in new[] { Environment.SpecialFolder.ApplicationData, Environment.SpecialFolder.LocalApplicationData })
         {
             var from = Path.Combine(Environment.GetFolderPath(root), old);
-            var to = Path.Combine(Environment.GetFolderPath(root), "Keybridge");
+            var to = Path.Combine(Environment.GetFolderPath(root), DataFolderName);
             try { if (Directory.Exists(from) && !Directory.Exists(to)) Directory.Move(from, to); }
             catch (Exception e) when (e is IOException or UnauthorizedAccessException) { }
         }
@@ -99,8 +101,13 @@ sealed class Settings : IPinStore
         {
             using var k = Registry.CurrentUser.OpenSubKey(RunKey, true);
             if (k is null) return;
-            var hadOld = k.GetValue(old) is string;
-            if (hadOld) k.DeleteValue(old, false);
+            var hadOld = false;
+            foreach (var oldName in new[] { old, "Keybridge" })
+            {
+                if (k.GetValue(oldName) is not string) continue;
+                hadOld = true;
+                k.DeleteValue(oldName, false);
+            }
             // Point start-with-Windows at this exe (it may have a new name or place).
             if (hadOld || k.GetValue(RunName) is string) k.SetValue(RunName, $"\"{Environment.ProcessPath}\"");
         }
@@ -109,7 +116,7 @@ sealed class Settings : IPinStore
 
     // Start with Windows (per user, no admin rights).
     private const string RunKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
-    private const string RunName = "Keybridge";
+    private const string RunName = "KeyBridge Control PC";
 
     public static bool StartWithWindows
     {
@@ -153,7 +160,7 @@ static class Dpapi
         {
             var input = new Blob { Size = data.Length, Data = handle.AddrOfPinnedObject() };
             var ok = protect
-                ? CryptProtectData(ref input, "Keybridge", IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, CRYPTPROTECT_UI_FORBIDDEN, out var output)
+                ? CryptProtectData(ref input, "KeyBridge Control PC", IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, CRYPTPROTECT_UI_FORBIDDEN, out var output)
                 : CryptUnprotectData(ref input, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, CRYPTPROTECT_UI_FORBIDDEN, out output);
             if (!ok) throw new InvalidOperationException($"DPAPI failed ({Marshal.GetLastWin32Error()})");
             try

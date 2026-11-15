@@ -193,7 +193,7 @@ final class Crossover: ObservableObject {
             status = .linked(pc: s.peerName)
             capture.setSink(s)
             pcNeedsUpdate = !s.peerSupports(Wire.featureFiles)
-            if pcNeedsUpdate { CrossoverLog.write("\(s.peerName) runs an older Keybridge: no file sharing until it's updated") }
+            if pcNeedsUpdate { CrossoverLog.write("\(s.peerName) runs an older KeyBridge Control PC: no file sharing until it's updated") }
             sentEdge = nil
             configure()
         case .closed:

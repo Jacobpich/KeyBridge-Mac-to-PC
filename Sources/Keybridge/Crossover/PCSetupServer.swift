@@ -3,7 +3,7 @@ import Foundation
 import Network
 
 /// A tiny web page on the local network (port 47822) for getting the Windows companion onto
-/// the PC: open http://<this Mac's IP>:47822 in the PC's browser and download Keybridge.exe.
+/// the PC: open http://<this Mac's IP>:47822 in the PC's browser and download KeyBridge-Control-PC.exe.
 /// Only runs while switched on, and turns itself off after 30 minutes.
 @MainActor
 final class PCSetupServer: ObservableObject {
@@ -14,7 +14,7 @@ final class PCSetupServer: ObservableObject {
     private var stopTimer: Timer?
 
     static var installerURL: URL? {
-        let url = Bundle.main.resourceURL?.appendingPathComponent("Keybridge.exe")
+        let url = Bundle.main.resourceURL?.appendingPathComponent("KeyBridge-Control-PC.exe")
         return url.flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil }
     }
 
@@ -54,13 +54,13 @@ final class PCSetupServer: ObservableObject {
             c.send(content: Data(head.utf8) + body, completion: .contentProcessed { _ in c.cancel() })
         }
         switch path {
-        case "/Keybridge.exe":
+        case "/KeyBridge-Control-PC.exe":
             guard let url = Self.installerURL, let data = try? Data(contentsOf: url) else {
                 send("404 Not Found", "text/plain", Data("The PC app hasn't been built yet.".utf8)); return
             }
             downloads += 1
             send("200 OK", "application/octet-stream", data,
-                 extra: "Content-Disposition: attachment; filename=\"Keybridge.exe\"\r\n")
+                 extra: "Content-Disposition: attachment; filename=\"KeyBridge-Control-PC.exe\"\r\n")
         case "/":
             send("200 OK", "text/html; charset=utf-8", Data(page.utf8))
         default:
@@ -72,19 +72,19 @@ final class PCSetupServer: ObservableObject {
         let ready = Self.installerURL != nil
         let name = Host.current().localizedName ?? "this Mac"
         return """
-        <!doctype html><html><head><meta charset="utf-8"><title>Keybridge</title>
+        <!doctype html><html><head><meta charset="utf-8"><title>KeyBridge Control PC</title>
         <style>body{font:16px -apple-system,Segoe UI,sans-serif;max-width:640px;margin:48px auto;padding:0 16px;line-height:1.5}
         a.button{display:inline-block;background:#0a64d8;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600}
         li{margin:6px 0}</style></head><body>
-        <h1>Keybridge</h1>
+        <h1>KeyBridge Control PC</h1>
         <p>Use the keyboard, mouse and trackpad from <b>\(name)</b> on this PC.</p>
-        \(ready ? "<p><a class=\"button\" href=\"/Keybridge.exe\">Download Keybridge.exe</a></p>"
+        \(ready ? "<p><a class=\"button\" href=\"/KeyBridge-Control-PC.exe\">Download KeyBridge-Control-PC.exe</a></p>"
                 : "<p><b>The PC app hasn't been built yet.</b></p>")
         <ol>
-        <li>Run <b>Keybridge.exe</b>. If Windows says it protected your PC, click <b>More info → Run anyway</b>.</li>
+        <li>Run <b>KeyBridge-Control-PC.exe</b>. If Windows says it protected your PC, click <b>More info → Run anyway</b>.</li>
         <li>It finds \(name) on the network by itself. Both screens then show the same 6-digit code: confirm it on both.</li>
-        <li>Move the pointer off the right edge of the Mac's screen to reach the PC, and off the PC's left edge to come back.
-        ⌃⌥⌘ Esc always brings it back to the Mac.</li>
+        <li>On the Mac, arrange the screens in Keybridge (Crossover → Arrange screens). Move the pointer off that side of the
+        Mac's screen to reach the PC, and back the way it came to return. ⌃⌥⌘ Esc always brings it back to the Mac.</li>
         </ol></body></html>
         """
     }

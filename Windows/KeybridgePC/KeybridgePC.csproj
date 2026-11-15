@@ -7,9 +7,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>12</LangVersion>
-    <AssemblyName>Keybridge</AssemblyName>
+    <AssemblyName>KeyBridge-Control-PC</AssemblyName>
     <RootNamespace>KeybridgePC</RootNamespace>
-    <Product>Keybridge</Product>
+    <Product>KeyBridge Control PC</Product>
+    <AssemblyTitle>KeyBridge Control PC</AssemblyTitle>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <!-- One self-contained exe: nothing to install on the PC. -->

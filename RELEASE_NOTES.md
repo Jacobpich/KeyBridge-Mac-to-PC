@@ -1,10 +1,6 @@
-Download both apps from this release: `Keybridge-macOS-arm64.zip` for the Mac and `Keybridge.exe` for the PC. Setup is in the [README](https://github.com/Jacobpich/KeyBridge-Mac-to-PC#readme).
+Download both apps from this release: `Keybridge-macOS-arm64.zip` for the Mac and `KeyBridge-Control-PC.exe` for the PC. Setup is in the [README](https://github.com/Jacobpich/KeyBridge-Mac-to-PC#readme).
 
-**MX Control is now Keybridge.** Settings and pairing move over by themselves on both computers. On the PC, running the new `Keybridge.exe` closes the old MX Control tray app.
+- **The PC app is now called KeyBridge Control PC** (`KeyBridge-Control-PC.exe`). Running it closes an older PC app (MX Control for PC, or Keybridge 1.1.0), keeps the pairing, and takes over **Start with Windows**. You can then delete the old `.exe`.
+- The Mac's PC setup page now serves the renamed file and describes arranging the screens.
 
-- **Arrange the screens:** drag the PC's screen to the left or right of, above or below any Mac screen, from the menu bar (Crossover → Arrange screens) or Crossover settings.
-- **Fixed:** the Mac app could crash when a file transfer stopped partway, after which the pointer no longer crossed over.
-- **Mixed versions keep working:** each app tells the other what it supports, so an older PC or Mac app no longer drops the connection when files are copied or dragged. Updating both is still needed for file sharing.
-- **Any keyboard or mouse:** Logitech pages appear only when a Logitech device is connected. Other keyboards, mice and trackpads are listed with their connection and, when macOS reports it, their battery.
-- Crossover asks for the Accessibility permission itself and carries on as soon as it's allowed.
-- "Open Keybridge at login" is now in the menu-bar dropdown.
+Everything from 1.1.0 is included: arranging the PC on any side of the Mac, the file-transfer crash fix, mixed-version compatibility, and support for any brand of keyboard and mouse.

@@ -1,10 +1,10 @@
 namespace KeybridgePC;
 
-/// %LOCALAPPDATA%\Keybridge\log.txt: what Crossover did, for working out problems.
+/// %LOCALAPPDATA%\KeyBridge\log.txt: what Crossover did, for working out problems.
 static class AppLog
 {
     public static readonly string File = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Keybridge", "log.txt");
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Settings.DataFolderName, "log.txt");
     private static readonly object Gate = new();
 
     public static void Write(string line)
